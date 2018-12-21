@@ -1,0 +1,44 @@
+{% extends 'base.html' %}  {# 引用模板文件 #}
+{# 页面标题 #}
+{% block title%}<title>我的博客</title>{% endblock %}
+{% block nav_blog_active %}active{% endblock %}
+
+{# 页面内容 #}
+{% block content %}
+    {# 快捷方式： div.container>div.row #}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">博客列表<p>（一共有{{ page_of_blogs.paginator.count|length}}}篇博客）</p></div>
+                <div class="panel-body">
+                 {% for blog in page_of_blogs.object_list %}
+                     <a href="{% url 'blog_detail' blog.pk %}">
+                    <h3>{{ blog.title }}</h3>
+                    </a>
+                    <p>{{ blog.content|truncatechars:20 }}</p> <!--过滤器-->
+                 {% empty %}
+                    <p>---暂无博客---</p>
+                 {% endfor %}
+
+                </div>
+
+            <div class="div.col-md-4">
+                <div class="panel panel-default">
+                <div class="panel-heading">博客分类</div>
+                <div class="panel-body">
+                    <ul style="list-style-type: none">
+                    {% for blog_type in blog_types %}
+                        <li><a href="{% url 'blogs_with_type' blog_type.pk %}">
+                            {{ blog_type.type_name }}</a></li>
+                    {% empty %}
+                        <li>暂无分类</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

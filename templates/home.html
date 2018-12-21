@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    我的网站|首页
+{% endblock %}
+{% block header_extends%}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+{% block content %}
+    <h3 class="home-content">一点也不欢迎访问的傲娇网站</h3>
+
+
+{% endblock %}

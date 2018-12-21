@@ -1,0 +1,48 @@
+{# 全局模板文件 #}
+{% load staticfiles %} {# 加载相关静态文件 #}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> {# IE适应 #}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {# 响应式布局 #}
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{% block title%}{% endblock %} </title> {# 创建模板标签 #}
+    <link rel="stylesheet" href="{% static 'base.css' %}"> {# 链接到外部文件 #}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css'%}">
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/1jquery-1.12.4.min.js' %}"></script>
+    {% block header_extends%}{% endblock %}
+</head>
+<body>
+{# 导航条 #}
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="{% url 'home' %}" class="navbar-brand">
+                    个人博客网站
+                </a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar-collpase" class="collapse navbar-collapse ">
+                  {# 下拉列表 #}
+                <ul class="nav navbar-nav">
+                    <li class="{% block nav_home_active %}{% endblock %}">
+                        <a href="{% url 'home' %}">首页</a></li>
+                    <li class="{% block nav_blog_active %}{% endblock %}">
+                        <a href="{% url 'blog_list' %}">博客</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>
